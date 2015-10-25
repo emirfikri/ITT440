@@ -1,4 +1,4 @@
-/* C socket server example */
+ /* C socket server example */
 
 #include <stdio.h>
 #include <string.h> //strlen
@@ -37,6 +37,11 @@ int main (int argc, char *argv[])
    on =1;
    ret = setsockopt(socket_desc , SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
   //end of pitfall 3
+   
+    //pitfall 5
+   ret = write(socket_desc , "Message 1", 50);
+   ret = write (socket_desc , "Message 2", 50);
+   // end of pitfall 5
 
    //Bind
   if(bind(socket_desc,(struct sockaddr *)&server , sizeof(server))<0)
@@ -60,11 +65,6 @@ int main (int argc, char *argv[])
  }
  puts("Connection accepted");  
    
-
-
-
-
-
 
 }
 
